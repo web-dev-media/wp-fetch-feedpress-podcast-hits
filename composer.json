@@ -1,0 +1,14 @@
+{
+  "name": "web-dev-media/wp-fetch-feedpress-podcast-hits",
+  "description": "",
+  "license": "GPL-2.0",
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WebDevMedia\\WpFetchFeedpressPodcastHits\\": "src"
+    }
+  }
+}
