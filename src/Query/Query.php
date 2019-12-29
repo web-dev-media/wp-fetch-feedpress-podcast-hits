@@ -2,7 +2,7 @@
 
 namespace WebDevMedia\WpFetchFeedpressPodcastHits\Query;
 
-use WebDevMedia\WpFetchFeedpressPodcastHits\Service;
+use WebDevMedia\WpFetchFeedpressPodcastHits\Helper;
 
 /**
  * Abstract Query class
@@ -21,11 +21,13 @@ abstract class Query {
 	 * @return array
 	 */
 	public function set_items( array $args ): array {
-		$optionStorageHandler = new Service\OptionStorageHandler($args['option_name']);
+		$optionStorageHandler = new Helper\OptionStorageHandler($args['option_name']);
 		$items = $optionStorageHandler->get();
 
+		$items = [];
+
 		if (empty($items) || is_wp_error($items) || (time() - $items['timestamp'] ) > HOUR_IN_SECONDS) {
-			new Service\Request( $args );
+			new Helper\Request( $args );
 			$items = $optionStorageHandler->get();
 		}
 

@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace WebDevMedia\WpFetchFeedpressPodcastHits\Service;
+namespace WebDevMedia\WpFetchFeedpressPodcastHits\Helper;
 
 /**
  * Handel data

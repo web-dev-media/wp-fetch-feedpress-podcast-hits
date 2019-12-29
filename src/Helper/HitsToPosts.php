@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevMedia\WpFetchFeedpressPodcastHits;
+namespace WebDevMedia\WpFetchFeedpressPodcastHits\Helper;
 
 class HitsToPosts {
 
@@ -18,9 +18,9 @@ class HitsToPosts {
 	/**
 	 * Start up
 	 */
-	public function __construct() {
+	public function __construct($hits) {
 		$this->setPosts();
-		$this->setHits();
+		$this->setHits($hits);
 
 		if(!empty($this->posts) && !empty($this->hits)){
 			$this->hitsToPost();
@@ -36,9 +36,16 @@ class HitsToPosts {
 			foreach ($this->hits as $hitGroupName =>$hitGroup){
 				if(!empty($hitGroup) && $hitGroupName != 'timestamp') {
 					foreach ($hitGroup as $hit) {
-						if ($post->post_title === $hit->title) {
-							$hits = $hits + $hit->hits;
+						$mediafiles = [
+							get_post_meta($post->ID, '_dipo_mediafile1', true),
+							get_post_meta($post->ID, '_dipo_mediafile2', true),
+							get_post_meta($post->ID, '_dipo_mediafile3', true),
+						];
 
+						foreach($mediafiles as $mediafile){
+							if ($mediafile['medialink'] === $hit->url ) {
+								$hits = $hits + $hit->hits;
+							}
 						}
 					}
 				}
@@ -60,8 +67,8 @@ class HitsToPosts {
 		}
 	}
 
-	private function setHits( ) {
-		$this->hits = (new Query\Hits())->get_items();
+	private function setHits($hits) {
+		$this->hits = $hits;
 	}
 
 

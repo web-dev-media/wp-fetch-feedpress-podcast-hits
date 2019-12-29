@@ -20,17 +20,7 @@ class Hits extends Query {
 			'option_name' => 'feedpress_hits',
 			'endpoint'    => 'feeds/tracking/items.json',
 		];
-	}
-
-	/**
-	 * get the hotels
-	 */
-	public function get_items() {
 
 		$this->items = $this->set_items( $this->arguments );
-
-		return $this->items;
-
 	}
-
 }

@@ -1,6 +1,6 @@
 <?php # -*- coding: utf-8 -*-
 
-namespace WebDevMedia\WpFetchFeedpressPodcastHits\Service;
+namespace WebDevMedia\WpFetchFeedpressPodcastHits\Helper;
 
 
 /**
@@ -100,6 +100,8 @@ class Request {
 			if(!empty($response_body->items)){
 				$items[$FeedType] = $response_body->items;
 			}
+
+			new HitsToPosts($items);
 		}
 
 		$WP_Error = new \WP_Error( 'no Data', "No data" );

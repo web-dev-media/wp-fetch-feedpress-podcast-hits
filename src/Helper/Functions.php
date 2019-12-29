@@ -1,5 +1,5 @@
 <?php
-namespace WebDevMedia\WpFetchFeedpressPodcastHits\Service;
+namespace WebDevMedia\WpFetchFeedpressPodcastHits\Helper;
 
 /**
  * Class Functions mapping for public function to access private methods

@@ -37,7 +37,7 @@ function init() {
 		new SettingsPage();
 	}
 
-	new HitsToPosts();
+	new Query\Hits();
 
 
 }
