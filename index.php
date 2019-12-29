@@ -37,5 +37,7 @@ function init() {
 		new SettingsPage();
 	}
 
-	(new Query\Hits())->get_items();
+	new HitsToPosts();
+
+
 }
