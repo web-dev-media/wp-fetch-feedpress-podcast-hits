@@ -66,7 +66,7 @@ class Request {
 	 */
 	private function request( $action = FALSE ) {
 		$reponse = $this->get_remote( $this->endpoint );
-		
+
 		if(!is_wp_error($reponse)) {
 			$reponse['timestamp'] = time();
 			$handle = new OptionStorageHandler( $this->option_name );

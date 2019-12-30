@@ -21,6 +21,10 @@ class Hits extends Query {
 			'endpoint'    => 'feeds/tracking/items.json',
 		];
 
-		$this->items = $this->set_items( $this->arguments );
+		$feedpress_option = get_option('feedpress_option');
+
+		if(!empty($feedpress_option['api_key']) && !empty($feedpress_option['api_token'])) {
+			$this->items = $this->set_items($this->arguments);
+		}
 	}
 }

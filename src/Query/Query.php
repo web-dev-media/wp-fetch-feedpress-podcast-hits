@@ -22,11 +22,11 @@ abstract class Query {
 	 */
 	public function set_items( array $args ): array {
 		$optionStorageHandler = new Helper\OptionStorageHandler($args['option_name']);
-		$items = $optionStorageHandler->get();
+		#$items = $optionStorageHandler->get();
 
 		$items = [];
 
-		if (empty($items) || is_wp_error($items) || (time() - $items['timestamp'] ) > HOUR_IN_SECONDS) {
+		if (empty($items) || (time() - $items['timestamp'] ) > HOUR_IN_SECONDS) {
 			new Helper\Request( $args );
 			$items = $optionStorageHandler->get();
 		}
