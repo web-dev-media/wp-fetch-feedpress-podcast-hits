@@ -37,6 +37,6 @@ class HitsRestEndpoint {
 			}
 		}
 
-		return json_encode($values);
+		return json_encode($values, JSON_FORCE_OBJECT | JSON_HEX_QUOT);
 	}
 }
