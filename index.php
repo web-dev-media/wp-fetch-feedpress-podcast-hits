@@ -38,6 +38,7 @@ function init() {
 	}
 
 	new Query\Hits();
+	new Helper\HitsRestEndpoint();
 
 
 }
