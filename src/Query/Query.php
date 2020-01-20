@@ -14,19 +14,22 @@ abstract class Query {
 
 	public $items;
 	public $arguments;
+	public $transient;
 
 	/**
-	 * @param array $args
+	 * @param array                   $args
+	 * @param Helper\TransientHandler $transient
 	 *
 	 * @return array
 	 */
-	public function set_items( array $args ): array {
+	public function set_items( array $args, Helper\TransientHandler $transient): array {
 		$optionStorageHandler = new Helper\OptionStorageHandler($args['option_name']);
-		#$items = $optionStorageHandler->get();
+		$items = $optionStorageHandler->get();
 
-		$items = [];
+		$cacheTime = 5 * HOUR_IN_SECONDS;
 
-		if (empty($items) || (time() - $items['timestamp'] ) > HOUR_IN_SECONDS) {
+		if (empty($items) || (time() - $transient->get() > $cacheTime)) {
+			$transient->set( time(), $cacheTime ); // cache response for 5 hours
 			new Helper\Request( $args );
 			$items = $optionStorageHandler->get();
 		}

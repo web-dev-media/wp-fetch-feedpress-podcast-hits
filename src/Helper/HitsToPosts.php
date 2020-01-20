@@ -15,15 +15,28 @@ class HitsToPosts {
 	 */
 	private $hits;
 
+	private $runtime;
+	
 	/**
 	 * Start up
 	 */
 	public function __construct($hits) {
-		$this->setPosts();
-		$this->setHits($hits);
+		if(empty($this->posts)) {
+			$this->setPosts();
+		
 
-		if(!empty($this->posts) && !empty($this->hits)){
+		if(!empty($this->posts) && !empty($hits)){
+			$this->setHits($hits);
 			$this->hitsToPost();
+
+			echo '<pre>';
+			print_r([
+				        'DEBUG_LOCATION' => ['PATH' => dirname(__FILE__), 'FILE' => basename(__FILE__), 'FUNCTION' => __FUNCTION__ . ':' . __LINE__],
+				        'DEBUG'          => [
+					        '$this->posts' => 'fff',
+				        ]
+			        ]);
+		}
 		}
 	}
 
@@ -53,16 +66,19 @@ class HitsToPosts {
 
 			update_post_meta($post->ID, 'feedpress_hits', $hits);
 		}
+
+
+		$this->runtime = md5(json_encode($this->posts));
 	}
 
 	private function setPosts() {
 		$posts = get_posts([
-			                    'numberposts'      => -1,
-			                    'post_type'        => 'dipo_podcast',
-			                    'post_status'      => 'publish,'
-		                    ]);
+			                   'numberposts' => - 1,
+			                   'post_type'   => 'dipo_podcast',
+			                   'post_status' => 'publish,'
+		                   ]);
 
-		if(!empty($posts)){
+		if (!empty($posts)) {
 			$this->posts = $posts;
 		}
 	}
